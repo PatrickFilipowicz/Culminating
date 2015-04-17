@@ -33,18 +33,18 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 	var TurnTimer2= 1;
 	
 	
-		var Wall1 = createWall (320,180,475,255, null);
-				Wall1.colour = 'green';
-		var Wall2 = createWall (415,390,670,85, null);
+		var Wall1 = createWall (330,180,470,255, null);
+				Wall1.colour = 'brown';
+		var Wall2 = createWall (415,400,670,75, null);
 				Wall2.colour = 'grey';
-		var Wall3 = createWall (790,275,125,120, null);
-				Wall3.colour = 'green';
+		var Wall3 = createWall (790,275,120,123, null);
+				Wall3.colour = 'orange';
 		var Wall4 = createWall (610,135,130,120, null);
 				Wall4.colour = 'grey';
 		//var Wall5 = createWall (1100,412,35,60, null);
 				//Wall5.colour = 'blue';
-		var Wall6 = createWall (1065,412,60,55, null);
-				Wall6.colour = 'green';
+		var Wall6 = createWall (1065,412,60,59, null);
+				Wall6.colour = 'blue';
 	
 		
 		
@@ -55,14 +55,14 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		
 		
 		
-		var Wall11 = createWall (124,400,76,77, null);
+		var Wall11 = createWall (130,410,60,63, null);
 				Wall11.colour = 'green';
-		var Wall12 = createWall (170,385,400,50, null);	
+		var Wall12 = createWall (170,395,400,40, null);	
 				Wall12.colour = 'red';
 		var Wall13 = createWall (2,4,190,260, null);	
 				Wall13.colour = 'blue';
-		var Wall14 = createWall (270,540,50,60, null);	
-				Wall14.colour = 'blue';
+		var Wall14 = createWall (270,555,50,60, null);	
+				Wall14.colour = 'yellow';
 				
 		var Wall15 = createWall (1100,2,200,290, null);	
 				Wall15.colour = 'blue';
@@ -99,6 +99,42 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 	screen = 1;
 		}	
 		
+	var Button4 = createButton (600,450,240,100, "Images/PlayAgainButton.png", "");
+	Button4.job = function(){
+	
+	screen = 2;
+	
+		YellowLap = 0;
+		YellowLap1Number = 0
+		YellowLap2Number = 0
+		OrangeLap1Number = 0
+		OrangeLap2Number = 0
+		OrangeLap = 0;
+		StartTimer = 4500;
+		CAR1.x = 830;
+		CAR1.y = 504;
+		CAR1.speedx=0;
+		CAR1.speedy=0;
+		CAR2.x = 780;
+		CAR2.y = 547.5;
+		CAR2.speedx=0;
+		CAR2.speedy=0;
+		Green.x = 200;
+		Green.y = 124;
+		Red3.x = 50;
+		Red3.y = 130;
+		Red2.x = 100;
+		Red2.y = 130;
+		Red1.x = 150;
+		Red1.y = 130;
+		c1Angle = 0;
+		c2Angle = 0;
+		car1Speed = 0;
+		car2Speed = 0;
+		Box.x = 40;
+		Box.y = 125;
+		}	
+		
 		
 		
 		
@@ -121,6 +157,13 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 	var YellowLap1 = createWall (920,470,30,130,null);
 	var YellowLap2 = createWall (610,15,30,130,null);
 	
+	var YellowLapBox = createWall (40,35,60,80,null);
+		YellowLapBox.colour = '#2C3539';
+		
+	var OrangeLapBox = createWall (1190,35,60,80,null);
+		OrangeLapBox.colour = '#2C3539';
+		
+		
 	var OrangeLap1Number = 0;
 	var OrangeLap2Number = 0;
 	
@@ -149,17 +192,17 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 	///STATE VARIABLES
 	/// All your variables get their start values here.
 	
-	CAR1.x = 825;
-	CAR1.y = 503.5;
+	CAR1.x = 830;
+	CAR1.y = 504;
 	CAR1.speedx=0;
 	CAR1.speedy=0;
 	CAR1.scale = 0.0659;
 	
-	CAR2.x = 775;
+	CAR2.x = 780;
 	CAR2.y = 547.5;
 	CAR2.speedx=0;
 	CAR2.speedy=0;
-	CAR2.scale = 0.09;
+	CAR2.scale = 0.09025;
 	
 	RACETRACK.scale = 0.865
 	
@@ -262,7 +305,7 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		CAR1.x+=CAR1.speedx
 		CAR1.y+=CAR1.speedy
 		
-		car1Speed *=0.985
+		car1Speed *=0.982
 		
 		CAR2.rotation = (c2Angle * 180 / Math.PI )
 		CAR2.speedx = Math.cos(c2Angle) * car2Speed
@@ -270,7 +313,7 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		CAR2.x+=CAR2.speedx
 		CAR2.y+=CAR2.speedy
 		
-		car2Speed *=0.985
+		car2Speed *=0.982
 		
 		
 ////////////////////////////////////////////////////////////////////////////////////
@@ -345,26 +388,39 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		
 		
 		if(CAR1.collideObject  (CAR2)){
-				if(car1Speed > car2Speed)
+				if(car1Speed > car2Speed){
 				Crash1.play()
-				car1Speed*=-0.2;
-				car2Speed*=1.2
+				car1Speed-= 2;
+				car1Speed*=0.1;
+				car2Speed+= 1;
+				car2Speed*=1.1;
 				CAR1.x-=CAR1.speedx
 				CAR1.y-=CAR1.speedy
 				
 				
-			}
-		
-		if(CAR2.collideObject  (CAR1)){
-				if(car2Speed > car1Speed)
+				
+				}else if(car2Speed > car1Speed){
 				Crash2.play()
-				car1Speed*=-0.2;
-				car2Speed*=0.2;
+				car1Speed+= 1;
+				car1Speed*=1.1;
+				car2Speed-= 2;
+				car2Speed*=0.1;
 				CAR2.x-=CAR2.speedx
 				CAR2.y-=CAR2.speedy
-				
 				}
-			
+				
+			}
+		
+		/*if(CAR2.collideObject  (CAR1)){
+				if(car2Speed > car1Speed){
+				Crash2.play()
+				car1Speed*=0.2;
+				car2Speed*=1.2;
+				CAR2.x-=CAR2.speedx
+				CAR2.y-=CAR2.speedy
+				}
+				}
+			*/
 	if (TurnTimer1==15){
 		TireScreech1.play()
 		TurnTimer1=1;
@@ -384,18 +440,21 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 			CAR1.draw()
 			CAR2.draw()
 			
+			YellowLapBox.draw()
+			OrangeLapBox.draw()
+			
 			ctx.fillStyle = '#F87217';
 		ctx.font = '80px Times New Roman';
 		ctx.fillText(OrangeLap, 50,100);
 		ctx.fillStyle = '#FFD801';
 		ctx.font = '80px Times New Roman';
-		ctx.fillText(YellowLap, 1000,100);
+		ctx.fillText(YellowLap, 1200,100);
 			
 
 		
 			
 			
-			/*
+		/*	
 			Wall1.draw()
 			Wall2.draw()
 			
@@ -422,8 +481,8 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 			Wall14.draw()
 			
 			Wall15.draw()
-			*/
 			
+			*/
 			
 			
 			Box.draw()
@@ -665,12 +724,19 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		
 ///////////////////////////////////////////////////////////////////////////		
 			
+			if (OrangeLap == 4){
+			
+			screen = 4
 			
 			
-		
+			}
+			
+			if (YellowLap == 4){
+			
+			screen = 5
 			
 			
-			
+			}
 			
 		
 			
@@ -704,8 +770,40 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		ctx.fillText ("SpaceBar = HandBrake",275,330);
 		
 		
-		}
 		
+		
+		}else if(screen == 4){//Player 1 (Orange Car) Win Screen
+		
+		ctx.fillStyle = '#F87217';
+		ctx.fillRect(0,0, w, h);	
+		ctx.fillStyle = 'black';
+		ctx.font = " 100px Times New Roman";
+		ctx.fillText ("CONGRATULATIONS!!!!", 320,90);
+		ctx.font = " 35px Times New Roman";
+		ctx.fillText ("PLAYER 1 WON", 450,190);
+		
+		
+		
+		Button4.draw();
+		
+		}else if(screen == 5){//Player 2 (Yellow Car) Win Screen
+		ctx.fillStyle = '#FFD801';
+		ctx.fillRect(0,0, w, h);
+		ctx.fillStyle = 'black';
+		ctx.font = " 100px Times New Roman";
+		ctx.fillText ("CONGRATULATIONS!!!!", 320,90);	
+		ctx.font = " 35px Times New Roman";
+		ctx.fillText ("PLAYER 2 WON", 450,190);
+		
+		
+		
+		
+		
+		
+		
+		Button4.draw();
+		
+		}
 		console.log(keys);
 	}////////////////////////////////////////////////////////////////////////////////END PAINT/ GAME ENGINE
 	
@@ -740,7 +838,18 @@ document.body.onmousedown = function() { return false; } //so page is unselectab
 		
 		
 	   
+		 }else if (screen == 4){
+		 if (Button4.isMouseOver()) Button4.job()
+		 
+		 
+		 
+		}else if (screen == 5){
+		 if (Button4.isMouseOver()) Button4.job()
+		 
 		 }
+		 
+		 
+		 
 	}, false);
 
 	
